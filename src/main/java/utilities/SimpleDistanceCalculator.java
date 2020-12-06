@@ -1,11 +1,11 @@
 package com.lokmanrazak.main.java.utilities;
 
-public class DistanceCalculator {
+public class SimpleDistanceCalculator {
     private double startLatitude;
     private double startLongitude;
     private double radius;
 
-    public DistanceCalculator(double startLatitude, double startLongitude, double radius) {
+    public SimpleDistanceCalculator(double startLatitude, double startLongitude, double radius) {
         this.startLatitude = Math.toRadians(startLatitude);
         this.startLongitude = Math.toRadians(startLongitude);
         this.radius = radius;

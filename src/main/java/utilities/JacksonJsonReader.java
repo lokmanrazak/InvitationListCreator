@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonReader {
+public class JacksonJsonReader {
     public List<Customer> getCustomerList(String filePath) throws Exception {
 
         try (BufferedReader br = new BufferedReader(new FileReader(new File(filePath)))) {

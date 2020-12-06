@@ -2,7 +2,7 @@ package com.lokmanrazak.test.java;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.lokmanrazak.main.java.models.Customer;
-import com.lokmanrazak.main.java.utilities.JsonReader;
+import com.lokmanrazak.main.java.utilities.JacksonJsonReader;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -14,12 +14,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JsonReaderTests {
+public class JacksonJsonReaderTests {
     @Test
     public void getCustomerList_givenValidFile_returnCorrectResult() throws Exception {
         String filePath = getClass().getClassLoader().getResource("customers.txt").getPath();
 
-        JsonReader jsonReader = new JsonReader();
+        JacksonJsonReader jsonReader = new JacksonJsonReader();
         List<Customer> result = jsonReader.getCustomerList(filePath);
 
         assertEquals(result.size(), 3);
@@ -42,7 +42,7 @@ public class JsonReaderTests {
 
     @Test
     public void getCustomerList_givenMissingFile_throwException() {
-        JsonReader jsonReader = new JsonReader();
+        JacksonJsonReader jsonReader = new JacksonJsonReader();
 
         assertThrows(FileNotFoundException.class, () -> jsonReader.getCustomerList("unknown.txt"));
     }
@@ -52,7 +52,7 @@ public class JsonReaderTests {
         Path tempPath = tempDir.resolve("wrong_json.txt");
         Files.writeString(tempPath, "{ name: John Doe, address: 12 Main Street }");
 
-        JsonReader jsonReader = new JsonReader();
+        JacksonJsonReader jsonReader = new JacksonJsonReader();
 
         assertThrows(JsonParseException.class, () -> jsonReader.getCustomerList(tempPath.toString()));
     }
