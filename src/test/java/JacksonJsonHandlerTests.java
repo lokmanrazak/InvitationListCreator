@@ -3,7 +3,7 @@ package com.lokmanrazak.test.java;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.lokmanrazak.main.java.interfaces.DistanceCalculator;
 import com.lokmanrazak.main.java.models.Customer;
-import com.lokmanrazak.main.java.utilities.JacksonJsonReader;
+import com.lokmanrazak.main.java.utilities.JacksonJsonHandler;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -16,13 +16,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class JacksonJsonReaderTests {
+public class JacksonJsonHandlerTests {
     @Test
     public void getCustomerList_givenValidFile_returnCorrectResult() throws Exception {
         String filePath = getClass().getClassLoader().getResource("customers.txt").getPath();
 
-        JacksonJsonReader jsonReader = new JacksonJsonReader(mock(DistanceCalculator.class));
-        List<Customer> result = jsonReader.getCustomerList(filePath);
+        JacksonJsonHandler jsonHandler = new JacksonJsonHandler(mock(DistanceCalculator.class));
+        List<Customer> result = jsonHandler.getCustomerList(filePath);
 
         assertEquals(result.size(), 3);
 
@@ -44,9 +44,9 @@ public class JacksonJsonReaderTests {
 
     @Test
     public void getCustomerList_givenMissingFile_throwException() {
-        JacksonJsonReader jsonReader = new JacksonJsonReader(mock(DistanceCalculator.class));
+        JacksonJsonHandler jsonHandler = new JacksonJsonHandler(mock(DistanceCalculator.class));
 
-        assertThrows(FileNotFoundException.class, () -> jsonReader.getCustomerList("unknown.txt"));
+        assertThrows(FileNotFoundException.class, () -> jsonHandler.getCustomerList("unknown.txt"));
     }
 
     @Test
@@ -54,8 +54,8 @@ public class JacksonJsonReaderTests {
         Path tempPath = tempDir.resolve("wrong_json.txt");
         Files.writeString(tempPath, "{ name: John Doe, address: 12 Main Street }");
 
-        JacksonJsonReader jsonReader = new JacksonJsonReader(mock(DistanceCalculator.class));
+        JacksonJsonHandler jsonHandler = new JacksonJsonHandler(mock(DistanceCalculator.class));
 
-        assertThrows(JsonParseException.class, () -> jsonReader.getCustomerList(tempPath.toString()));
+        assertThrows(JsonParseException.class, () -> jsonHandler.getCustomerList(tempPath.toString()));
     }
 }

@@ -4,6 +4,6 @@ import com.lokmanrazak.main.java.models.Customer;
 
 import java.util.List;
 
-public interface JsonReader {
+public interface JsonHandler {
     List<Customer> getCustomerList(String filePath);
 }

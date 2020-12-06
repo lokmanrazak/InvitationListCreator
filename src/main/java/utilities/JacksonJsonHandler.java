@@ -9,10 +9,10 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JacksonJsonReader {
+public class JacksonJsonHandler {
     private DistanceCalculator distanceCalculator;
 
-    public JacksonJsonReader(DistanceCalculator distanceCalculator) {
+    public JacksonJsonHandler(DistanceCalculator distanceCalculator) {
         this.distanceCalculator = distanceCalculator;
     }
 
