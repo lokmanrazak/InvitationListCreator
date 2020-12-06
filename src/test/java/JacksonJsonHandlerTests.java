@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,5 +58,30 @@ public class JacksonJsonHandlerTests {
         JacksonJsonHandler jsonHandler = new JacksonJsonHandler(mock(DistanceCalculator.class));
 
         assertThrows(JsonParseException.class, () -> jsonHandler.getCustomerList(tempPath.toString()));
+    }
+
+    @Test
+    public void outputFile_givenValidList_returnCorrectOutput(@TempDir Path tempDir) throws Exception {
+        JacksonJsonHandler jsonHandler = new JacksonJsonHandler(mock(DistanceCalculator.class));
+
+        List<Customer> customers = Arrays.asList(
+                createCustomer(1, "John Green"),
+                createCustomer(2, "Sarah Lee"));
+
+        Path tempPath = tempDir.resolve("customers.txt");
+
+        jsonHandler.outputFile(tempPath.toString(), customers);
+
+        List<String> result = Files.readAllLines(tempPath.resolveSibling("output.txt"));
+
+        assertEquals(result.get(0), "{\"user_id\":1,\"name\":\"John Green\"}");
+        assertEquals(result.get(1), "{\"user_id\":2,\"name\":\"Sarah Lee\"}");
+    }
+
+    private Customer createCustomer(int userId, String name) {
+        Customer customer = new Customer();
+        customer.userId = userId;
+        customer.name = name;
+        return customer;
     }
 }

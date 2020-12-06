@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface JsonHandler {
     List<Customer> getCustomerList(String filePath);
+
+    void outputFile(String filePath, List<Customer> customers);
 }
