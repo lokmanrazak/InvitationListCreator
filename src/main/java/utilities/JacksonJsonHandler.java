@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.lokmanrazak.main.java.interfaces.DistanceCalculator;
+import com.lokmanrazak.main.java.interfaces.JsonHandler;
 import com.lokmanrazak.main.java.models.Customer;
 
 import java.io.*;
@@ -14,8 +15,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JacksonJsonHandler {
-    private DistanceCalculator distanceCalculator;
+public class JacksonJsonHandler implements JsonHandler {
+    private final DistanceCalculator distanceCalculator;
 
     public JacksonJsonHandler(DistanceCalculator distanceCalculator) {
         this.distanceCalculator = distanceCalculator;
@@ -46,6 +47,8 @@ public class JacksonJsonHandler {
         om.setFilterProvider(filterProvider);
 
         Path outputPath = Path.of(filePath).resolveSibling("output.txt");
+
+        Files.deleteIfExists(outputPath);
 
         for (Customer customer : customers) {
             Files.writeString(
