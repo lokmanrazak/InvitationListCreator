@@ -1,4 +1,4 @@
-package com.lokmanrazak.main.java;
+package com.lokmanrazak.main.java.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

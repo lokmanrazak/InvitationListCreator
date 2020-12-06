@@ -1,8 +1,8 @@
 package com.lokmanrazak.test.java;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.lokmanrazak.main.java.Customer;
-import com.lokmanrazak.main.java.JsonReader;
+import com.lokmanrazak.main.java.models.Customer;
+import com.lokmanrazak.main.java.utilities.JsonReader;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 

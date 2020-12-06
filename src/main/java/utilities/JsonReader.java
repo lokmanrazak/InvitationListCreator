@@ -1,6 +1,7 @@
-package com.lokmanrazak.main.java;
+package com.lokmanrazak.main.java.utilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lokmanrazak.main.java.models.Customer;
 
 import java.io.*;
 import java.io.FileReader;

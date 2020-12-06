@@ -1,4 +1,4 @@
-package com.lokmanrazak.main.java;
+package com.lokmanrazak.main.java.utilities;
 
 public class DistanceCalculator {
     private double startLatitude;

@@ -1,6 +1,6 @@
 package com.lokmanrazak.test.java;
 
-import com.lokmanrazak.main.java.DistanceCalculator;
+import com.lokmanrazak.main.java.utilities.DistanceCalculator;
 import org.junit.jupiter.api.Test;
 
 
