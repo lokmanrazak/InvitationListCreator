@@ -1,6 +1,7 @@
 package com.lokmanrazak.test.java;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.lokmanrazak.main.java.interfaces.DistanceCalculator;
 import com.lokmanrazak.main.java.models.Customer;
 import com.lokmanrazak.main.java.utilities.JacksonJsonReader;
 import org.junit.jupiter.api.Test;
@@ -13,13 +14,14 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class JacksonJsonReaderTests {
     @Test
     public void getCustomerList_givenValidFile_returnCorrectResult() throws Exception {
         String filePath = getClass().getClassLoader().getResource("customers.txt").getPath();
 
-        JacksonJsonReader jsonReader = new JacksonJsonReader();
+        JacksonJsonReader jsonReader = new JacksonJsonReader(mock(DistanceCalculator.class));
         List<Customer> result = jsonReader.getCustomerList(filePath);
 
         assertEquals(result.size(), 3);
@@ -42,7 +44,7 @@ public class JacksonJsonReaderTests {
 
     @Test
     public void getCustomerList_givenMissingFile_throwException() {
-        JacksonJsonReader jsonReader = new JacksonJsonReader();
+        JacksonJsonReader jsonReader = new JacksonJsonReader(mock(DistanceCalculator.class));
 
         assertThrows(FileNotFoundException.class, () -> jsonReader.getCustomerList("unknown.txt"));
     }
@@ -52,7 +54,7 @@ public class JacksonJsonReaderTests {
         Path tempPath = tempDir.resolve("wrong_json.txt");
         Files.writeString(tempPath, "{ name: John Doe, address: 12 Main Street }");
 
-        JacksonJsonReader jsonReader = new JacksonJsonReader();
+        JacksonJsonReader jsonReader = new JacksonJsonReader(mock(DistanceCalculator.class));
 
         assertThrows(JsonParseException.class, () -> jsonReader.getCustomerList(tempPath.toString()));
     }

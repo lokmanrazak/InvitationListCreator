@@ -8,4 +8,5 @@ public class Customer {
     public String name;
     public double latitude;
     public double longitude;
+    public double distance;
 }
